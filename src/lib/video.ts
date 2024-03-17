@@ -37,7 +37,6 @@ export class CreditCardScanner {
     }
 
     private async doOCR(imgData: string) {
-        const canvas = await this.getCanvas();
         const { data } = await this.scheduler.addJob('recognize', imgData);
         return data;
     }

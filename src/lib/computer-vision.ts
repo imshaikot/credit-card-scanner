@@ -62,7 +62,7 @@ function matToImageData(mat: any) {
     const c = document.createElement('canvas');
     c.width = mat.cols;
     c.height = mat.rows;
-    const img = cv.imshow(c, mat)
+   cv.imshow(c, mat)
     return c.toDataURL();
 }
 
