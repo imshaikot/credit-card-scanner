@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { CreditCardScanner } from './lib/video';
 import { CreditCardScannerType } from './lib/types';
