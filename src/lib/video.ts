@@ -11,8 +11,6 @@ export class CreditCardScanner {
 
     private scheduler: Scheduler = createScheduler();
 
-    constructor() {}
-
     private async attachMedia() {
         const stream =  await navigator.mediaDevices.getUserMedia({ video: {
             width: { ideal: 1280 },
