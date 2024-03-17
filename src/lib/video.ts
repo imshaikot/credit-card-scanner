@@ -1,6 +1,5 @@
 import './preview.css';
 import { createWorker, createScheduler, Scheduler } from 'tesseract.js';
-import p5 from 'p5';
 import { getCameraFrame, cropCanvas } from './canvas';
 import { CreditCardScannerType } from './types';
 import { enhanceImageWithOpenCV } from './computer-vision';

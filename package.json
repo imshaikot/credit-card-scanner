@@ -1,7 +1,7 @@
 {
-  "name": "cc-ocr-app",
-  "version": "0.1.0",
-  "private": true,
+  "name": "cc-scanner-ocr",
+  "version": "0.0.1",
+  "author": "Shahriar Shaikot Hena",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -40,8 +40,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/p5": "^1.7.6"
   }
 }
