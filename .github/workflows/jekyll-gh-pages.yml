@@ -35,6 +35,8 @@ jobs:
         with:
           source: ./
           destination: ./_site
+      - name: Build NPM
+        run: npm install
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
