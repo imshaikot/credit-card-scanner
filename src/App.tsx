@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import './App.css';
 import { CreditCardScanner } from './lib/video';
 import { CreditCardScannerType } from './lib/types';
-import { read } from 'fs';
 
 function App() {
   const ref = useRef<HTMLInputElement>(null);
