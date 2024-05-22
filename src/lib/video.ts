@@ -20,7 +20,7 @@ export class CreditCardScanner {
         this.videoNode.srcObject = stream;
     }
 
-    private getCanvas(): Promise<HTMLCanvasElement> {
+    private getCanvas(media?: HTMLImageElement): Promise<HTMLCanvasElement> {
         return new Promise((resolve) => {
             const canvas = document.createElement('canvas');
             canvas.width = 640;
@@ -28,7 +28,8 @@ export class CreditCardScanner {
             
             const context = canvas.getContext('2d');
             if (context) {
-                context.drawImage(this.videoNode, 0, 0, 640, 360);
+                context
+                .drawImage(media || this.videoNode, 0, 0, 640, 360);
                 resolve(cropCanvas(canvas, 98, 40, 446, 282))
             }
         });
@@ -50,12 +51,16 @@ export class CreditCardScanner {
         }
     }
 
-    public async initialize() {
-        await this.attachMedia();
+    public async initialize(media?: HTMLImageElement) {
+        if (!media) await this.attachMedia();
         this.previewNode.classList.add('tooltip');
         this.previewNode.classList.add('bottom');
-        this.previewNode.appendChild(this.videoNode);
-        this.videoNode.play();
+        if (!media) {
+            this.previewNode.appendChild(this.videoNode);
+            this.videoNode.play();
+        } else {
+            this.previewNode.appendChild(media);
+        }
         return new Promise<CreditCardScannerType>((resolve) => {
             const cb = () => {
                 resolve({
@@ -65,7 +70,7 @@ export class CreditCardScanner {
                     },
                     start: async () => {
                         await this.createWorker();
-                        const originalCanvas = await this.getCanvas();
+                        const originalCanvas = await this.getCanvas(media);
                         const originalImage = originalCanvas.toDataURL()
                         const cvEnhancedImgs = await enhanceImageWithOpenCV(originalCanvas);
                         const ocrs = [
@@ -128,9 +133,13 @@ export class CreditCardScanner {
                         this.videoNode.play();
                     }
                 });
-                this.videoNode.removeEventListener('play', cb);
+                if (!media) this.videoNode.removeEventListener('play', cb);
             }
-            this.videoNode.addEventListener('play', cb);
+            if (!media) {
+                this.videoNode.addEventListener('play', cb);
+            } else {
+                cb();
+            }
         })
     }
 

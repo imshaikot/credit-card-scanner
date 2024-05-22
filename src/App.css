@@ -37,9 +37,50 @@
   border: 1px solid gray;
 }
 
+.button-group {
+  display: flex;
+  gap: 30px;
+  justify-content: space-around;
+}
+
 
 button {
-  height: 40px;
   min-width: 100px;
-  font-size: 24px;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 16px 32px;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 24px;
+  outline: none;
+  transition: all 100ms;
+}
+
+.button-primary {
+  border: 1px solid #007FFF;
+  background-color: transparent;
+}
+
+.button-primary:hover {
+  border-color: #0070e0;
+  background-color: #f2f2f2;
+}
+
+.button-primary:active {
+  border-color: #0266c9;
+  background-color: #e8e8e8;
+}
+
+.button-secondary {
+  background: #007FFF;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.button-secondary:hover {
+  background-color: #0070e0;
+}
+
+.button-secondary:active {
+  background-color: #0266c9;
 }
