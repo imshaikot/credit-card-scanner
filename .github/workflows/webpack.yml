@@ -25,3 +25,4 @@ jobs:
         with:
           BRANCH: gh-pages
           FOLDER: build # your output folder name
+          TOKEN: ${{ secrets.PAT_TOKEN }}
