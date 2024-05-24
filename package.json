@@ -1,5 +1,6 @@
 {
   "name": "cc-scanner-ocr",
+  "homepage": ".",
   "version": "0.0.1",
   "author": "Shahriar Shaikot Hena",
   "dependencies": {
