@@ -11,12 +11,6 @@ jobs:
         with:
           persist-credentials: false
       - uses: actions/checkout@v2
-      - name: Set up Git
-        run: |
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
-          git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/imshaikot/credit-card-scanner.git
-      - run: yarn install --frozen-lockfile # run install script
       - run: yarn build # run build script
       # npm version:
       #- run: npm ci
@@ -25,4 +19,4 @@ jobs:
         with:
           BRANCH: gh-pages
           FOLDER: build # your output folder name
-          TOKEN: ${{ secrets.PAT_TOKEN }}
+          SSH-KEY: ${{ secrets.DEPLOY_KEY }}
