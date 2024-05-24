@@ -1,7 +1,15 @@
 import React, { useRef, useState } from 'react';
+import { PaymentIcon } from 'react-svg-credit-card-payment-icons';
+import creditcardType from 'credit-card-type';
 import './App.css';
 import { CreditCardScanner } from './lib/video';
 import { CreditCardScannerType } from './lib/types';
+
+function toName(cc: any) {
+  if (!cc) return 'generic'
+  console.log(cc)
+  return cc.type;
+}
 
 function App() {
   const ref = useRef<HTMLInputElement>(null);
@@ -70,6 +78,8 @@ function App() {
 
   return (
     <div className="App">
+      Either use your camera to capture a credit-card image OR select a image file to scan the card. 
+      Don't worry, everything happens on your own browser and no servers are involved between you and the scanner. 
       <input onChange={processImageFile} ref={fileInput} type='file' accept='image/*' style={{ visibility: 'hidden', width: '1px' }} />
       <div className='preview' ref={ref}>
         <h1>Preview</h1>
@@ -89,10 +99,18 @@ function App() {
         scannedData.length && !isProcessing ? (
           <div className='img-container'>
             {scannedData.map(({ name, url, data }) => {
-              const str = data.text.split('\n').find((t: string) => t.length > 3);
+              const str = data.text.split('\n').find((t: string) => t.length > 2);
               return str && <div key={name}>
                 <img src={url} alt={name} />
-                <p><b>{str}</b> (OCR Accuracy: {data.confidence})</p>
+                <div style={{ 
+                  justifyContent: 'center', 
+                  alignItems: 'center', 
+                  display: 'flex',
+                  gap: '10px' 
+                  }}>
+                  <PaymentIcon type={toName(creditcardType(str)[0])} />
+                  <b>{str}</b> (OCR Accuracy: {data.confidence})
+                </div>
               </div>
             })}
           </div>
