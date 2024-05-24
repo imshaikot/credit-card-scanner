@@ -32,6 +32,9 @@ jobs:
     - name: Build React app
       run: npm run build
 
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+
   # Single deploy job since we're just deploying
 # Deployment job
   deploy:
